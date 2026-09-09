@@ -4,7 +4,7 @@ const Database = require("better-sqlite3");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "change-this-password";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD "change-this-password";
 
 const db = new Database("exchange.db");
 db.pragma("journal_mode = WAL");
