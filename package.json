@@ -1,11 +1,24 @@
 {
   "name": "usdt-naira-exchange",
   "version": "1.0.0",
-  "description": "USDT to Naira exchange website with admin-controlled rate and payment details",
+  "description": "USDT to Naira Exchange API Backend",
   "main": "server.js",
-  "scripts": { "start": "node server.js" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "usdt",
+    "exchange",
+    "api",
+    "naira"
+  ],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "express": "^4.21.2",
-    "better-sqlite3": "^11.8.1"
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.0"
   }
 }
