@@ -1,23 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USDT to Naira Exchange</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USDT to Naira Exchange</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    body {
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      width: 100%;
+      max-width: 400px;
+      background: #111;
+      padding: 25px;
+      border-radius: 12px;
+    }
+    h1 {
+      color: #00ff88;
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+    .rate-box {
+      color: #00ff88;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 15px 0 25px 0;
+      padding: 10px;
+      background: #1a1a1a;
+      border-radius: 8px;
+    }
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 12px;
+      background: #222;
+      border: 1px solid #333;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+    }
+    input::placeholder {
+      color: #666;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: #00ff88;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .submit-btn:active {
+      transform: scale(0.98);
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>USDT to Naira Exchange</h1>
-        <form id="orderForm">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="text" id="whatsapp" placeholder="WhatsApp Number" required>
-            <input type="number" id="usdt" placeholder="USDT Amount" required>
-            <input type="text" id="wallet" placeholder="Your USDT Wallet Address" required>
-            <button type="submit">Submit Order</button>
-        </form>
-        <div id="result"></div>
+  <div class="container">
+    <h1>USDT to Naira Exchange</h1>
+    
+    <div class="rate-box">
+      Current Rate: ₦<span id="rate">Loading...</span> / 1 USDT
     </div>
-    <script src="app.js"></script>
+
+    <form id="orderForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="tel" id="whatsapp" placeholder="WhatsApp Number" required>
+      <input type="number" id="amount" placeholder="USDT Amount" required>
+      <input type="text" id="wallet" placeholder="Your USDT Wallet Address" required>
+      
+      <button type="submit" class="submit-btn">Submit Order</button>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
