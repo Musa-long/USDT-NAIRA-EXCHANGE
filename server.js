@@ -1,54 +1,58 @@
-require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
+const { Pool } = require('pg');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
+const PORT = process.env.PORT || 10000;
+
+// Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
 
-const PORT = process.env.PORT || 3000;
-
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("✅ Connected to MongoDB Atlas"))
-.catch(err => console.error(err));
-
-// Test route
-app.get("/", (req, res) => {
-  res.json({ message: "USDT-Naira API is running!" });
-});
-
-// User Schema
-const userSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  balance: { type: Number, default: 0 }
-});
-const User = mongoose.model("User", userSchema);
-
-// REGISTER ROUTE
-app.post("/register", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const newUser = new User({ email, password });
-    await newUser.save();
-    res.status(201).json({ message: "User registered successfully" });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+// Connect to Neon Database
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { 
+    rejectUnauthorized: false 
   }
 });
 
-// LOGIN ROUTE
-app.post("/login", async (req, res) => {
+// Test DB connection on startup
+pool.connect((err, client, release) => {
+  if (err) {
+    return console.error('Error connecting to DB', err.stack);
+  }
+  console.log('Connected to Neon Database ✅');
+  release();
+});
+
+// ROUTE 1: Get latest USDT rate
+app.get('/rate', async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email, password });
-    if (!user) return res.status(400).json({ error: "Invalid credentials" });
-    res.json({ message: "Login successful", userId: user._id });
+    const result = await pool.query(
+      'SELECT rate, updated_at FROM rates ORDER BY updated_at DESC LIMIT 1'
+    );
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "No rate found in database" });
+    }
+    
+    res.json(result.rows[0]);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    console.error(err);
+    res.status(500).json({ error: err.message });
   }
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// ROUTE 2: Homepage
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Start Server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+---
