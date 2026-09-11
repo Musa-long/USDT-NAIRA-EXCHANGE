@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Details - USDT Exchange</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+    body { background: #000; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+    .container { width: 100%; max-width: 400px; background: #111; padding: 25px; border-radius: 12px; text-align: center; }
+    h1 { color: #00ff88; margin-bottom: 20px; }
+    .box { background: #1a1a1a; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: left; border: 1px solid #222; }
+    .total { font-size: 28px; color: #00ff88; font-weight: bold; text-align: center; }
+    .label { color: #888; font-size: 12px; }
+    .value { font-size: 16px; margin-top: 5px; font-weight: bold; }
+    .btn { width: 100%; padding: 15px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    .btn2 { background: #333; color: #00ff88; }
+    .btn:active { transform: scale(0.98); }
+    .note { font-size: 12px; color: #aaa; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Complete Your Order</h1>
+    
+    <div class="box">
+      <div class="label">Name</div>
+      <div class="value" id="name"></div>
+    </div>
+
+    <div class="box">
+      <div class="label">USDT Amount</div>
+      <div class="value" id="usdtAmount"></div>
+    </div>
+
+    <div class="box">
+      <div class="label">Rate</div>
+      <div class="value">₦<span id="rate"></span> / 1 USDT</div>
+    </div>
+
+    <div class="box">
+      <div class="label">Total Amount To Pay</div>
+      <div class="total">₦<span id="total"></span></div>
+    </div>
+
+    <div class="box">
+      <div class="label">Your Wallet Address</div>
+      <div class="value" id="wallet"></div>
+    </div>
+
+    <h3 style="margin-top: 20px; color: #00ff88;">Transfer To:</h3>
+    <div class="box">
+      <div class="label">Bank Name</div>
+      <div class="value">Sterling Bank</div>
+      <div class="label" style="margin-top:10px;">Account Name</div>
+      <div class="value">DATA/247 COMMUNICATION LTD-WAD</div>
+      <div class="label" style="margin-top:10px;">Account Number</div>
+      <div class="value">8387778364 <button onclick="copyAcc()" style="background:#333; color:#00ff88; border:none; padding:4px 8px; border-radius:4px; font-size:11px; margin-left:5px; cursor:pointer;">Copy</button></div>
+    </div>
+
+    <button class="btn" onclick="whatsappSupport()">Customer Care</button>
+    <button class="btn btn2" onclick="window.location.href='/'">Place Another Order</button>
+    
+    <p class="note">Transfer the exact amount above. After payment, chat Customer Care with proof. USDT will be sent in 5 minutes.</p>
+  </div>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem('orderData'));
+    if(data){
+      document.getElementById('name').innerText = data.name;
+      document.getElementById('usdtAmount').innerText = data.amount + ' USDT';
+      document.getElementById('rate').innerText = data.rate;
+      document.getElementById('total').innerText = data.totalNaira.toLocaleString();
+      document.getElementById('wallet').innerText = data.wallet;
+    } else {
+      window.location.href = '/';
+    }
+
+    function copyAcc(){
+      navigator.clipboard.writeText('8387778364');
+      alert('Account number copied!');
+    }
+
+    function whatsappSupport(){
+      window.open(`https://wa.me/2349167542777?text=Hello, I need help with my USDT order`, '_blank');
+    }
+  </script>
+</body>
+</html>
