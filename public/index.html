@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NairaFlow - USDT Exchange</title>
+  <style>
+    body { background: #0a0f0d; color: #fff; font-family: Arial; padding: 20px; }
+    .card { background: #121a16; border-radius: 16px; padding: 20px; max-width: 450px; margin: auto; }
+    input { width: 100%; padding: 12px; background: #1a231f; border: 1px solid #2a3a32; border-radius: 8px; color: #fff; margin: 8px 0; }
+    button { width: 100%; padding: 15px; background: #00ff88; color: #000; border: none; border-radius: 10px; font-weight: bold; margin-top: 10px; }
+    h1 { color: #00ff88; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>NairaFlow</h1>
+    <p>BUY USDT WITH NAIRA</p>
+    <p>Rate: ₦<span id="rate">1550</span> / USDT</p>
+
+    <label>Full Name</label>
+    <input type="text" id="fullName" placeholder="Enter your full name">
+
+    <label>Naira Amount</label>
+    <input type="number" id="nairaAmount" placeholder="Enter amount" min="1000">
+    <p>USDT: <span id="usdtPreview">0.0000</span></p>
+
+    <label>USDT Wallet TRC20</label>
+    <input type="text" id="wallet" placeholder="Paste wallet">
+
+    <button id="buyBtn">BUY USDT NOW</button>
+  </div>
+
+  <script>
+    const rate = 1550; 
+    document.getElementById('nairaAmount').addEventListener('input', (e) => {
+        const usdt = (e.target.value || 0) / rate;
+        document.getElementById('usdtPreview').innerText = usdt.toFixed(4);
+    });
+    document.getElementById('buyBtn').addEventListener('click', () => {
+        const name = document.getElementById('fullName').value.trim();
+        const nairaAmount = parseFloat(document.getElementById('nairaAmount').value);
+        const wallet = document.getElementById('wallet').value.trim();
+        if(!name ||!nairaAmount ||!wallet){ alert('Fill all fields'); return; }
+        const orderData = { name, amount: (nairaAmount/rate).toFixed(4), rate, totalNaira: nairaAmount, wallet };
+        localStorage.setItem('orderData', JSON.stringify(orderData));
+        window.location.href = '/bank-details.html';
+    });
+  </script>
+</body>
+</html>
