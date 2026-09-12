@@ -7,22 +7,26 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
     body { background: #000; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-    .container { width: 100%; max-width: 400px; background: #111; padding: 25px; border-radius: 12px; text-align: center; }
+   .container { width: 100%; max-width: 400px; background: #111; padding: 25px; border-radius: 12px; text-align: center; }
     h1 { color: #00ff88; margin-bottom: 20px; }
-    .box { background: #1a1a1a; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: left; border: 1px solid #222; }
-    .total { font-size: 28px; color: #00ff88; font-weight: bold; text-align: center; }
-    .label { color: #888; font-size: 12px; }
-    .value { font-size: 16px; margin-top: 5px; font-weight: bold; }
-    .btn { width: 100%; padding: 15px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-    .btn2 { background: #333; color: #00ff88; }
-    .btn:active { transform: scale(0.98); }
-    .note { font-size: 12px; color: #aaa; margin-top: 15px; }
+   .box { background: #1a1a1a; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: left; border: 1px solid #222; }
+   .total { font-size: 28px; color: #00ff88; font-weight: bold; text-align: center; }
+   .label { color: #888; font-size: 12px; }
+   .value { font-size: 16px; margin-top: 5px; font-weight: bold; }
+   .btn { width: 100%; padding: 15px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+   .btn2 { background: #333; color: #00ff88; }
+   .btn:active { transform: scale(0.98); }
+   .note { font-size: 12px; color: #aaa; margin-top: 15px; }
+
+    /* NEW SCREENSHOT BUTTON STYLE */
+   .screenshot-btn { width: 100%; padding: 15px; background: #FFA500; color: #000; border: none; border-radius: 8px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 10px; }
+   .screenshot-note { font-size: 11px; color: #aaa; margin-top: 8px; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Complete Your Order</h1>
-    
+
     <div class="box">
       <div class="label">Name</div>
       <div class="value" id="name"></div>
@@ -58,10 +62,15 @@
       <div class="value">8387778364 <button onclick="copyAcc()" style="background:#333; color:#00ff88; border:none; padding:4px 8px; border-radius:4px; font-size:11px; margin-left:5px; cursor:pointer;">Copy</button></div>
     </div>
 
-    <button class="btn" onclick="whatsappSupport()">Customer Care</button>
+    <!-- REMOVED: Customer Care Button -->
+    <!-- NEW: Submit Screenshot Button RIGHT HERE BELOW BANK DETAILS -->
+    <label for="screenshot" class="screenshot-btn">📸 Submit Payment Screenshot</label>
+    <input type="file" id="screenshot" accept="image/*" capture="camera" style="display:none;" onchange="sendToWhatsApp(this)">
+    <p class="screenshot-note">Upload proof after payment. We'll confirm in 5 minutes.</p>
+
     <button class="btn btn2" onclick="window.location.href='/'">Place Another Order</button>
-    
-    <p class="note">Transfer the exact amount above. After payment, chat Customer Care with proof. USDT will be sent in 5 minutes.</p>
+
+    <p class="note">Transfer the exact amount above. After payment, upload proof above. USDT will be sent in 5 minutes.</p>
   </div>
 
   <script>
@@ -81,8 +90,17 @@
       alert('Account number copied!');
     }
 
-    function whatsappSupport(){
-      window.open(`https://wa.me/2349167542777?text=Hello, I need help with my USDT order`, '_blank');
+    // NEW FUNCTION: Send screenshot to WhatsApp
+    function sendToWhatsApp(input) {
+      if(input.files[0]) {
+        const name = data.name;
+        const amount = data.totalNaira.toLocaleString();
+        const wallet = data.wallet;
+        const message = `Hello NairaFlow, New Payment! \n\nName: ${name}\nAmount: ₦${amount}\nWallet: ${wallet}\n\nPlease confirm my USDT order.`;
+        const whatsappUrl = `https://wa.me/2349167452777?text=${encodeURIComponent(message)}`;
+        alert("Screenshot selected! \n\nNext: You will be redirected to WhatsApp to send it");
+        window.open(whatsappUrl, '_blank');
+      }
     }
   </script>
 </body>
