@@ -16,11 +16,18 @@
    .btn { width: 100%; padding: 15px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
    .btn2 { background: #333; color: #00ff88; }
    .btn:active { transform: scale(0.98); }
+   .btn:disabled { background: #444; color: #777; cursor: not-allowed; }
    .note { font-size: 12px; color: #aaa; margin-top: 15px; }
 
-    /* NEW SCREENSHOT BUTTON STYLE */
+    /* SCREENSHOT BUTTON */
    .screenshot-btn { width: 100%; padding: 15px; background: #FFA500; color: #000; border: none; border-radius: 8px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 10px; }
-   .screenshot-note { font-size: 11px; color: #aaa; margin-top: 8px; }
+   .screenshot-note { font-size: 11px; color: #aaa; margin-top: 8px; margin-bottom: 10px; }
+
+    /* RECEIVE USDT + COUNTDOWN */
+   .receive-btn { width: 100%; padding: 15px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 5px; }
+   .countdown-box { background: #1a231f; border: 1px solid #00ff88; border-radius: 8px; padding: 15px; margin-top: 10px; display: none; }
+   .countdown-timer { font-size: 24px; color: #00ff88; font-weight: bold; }
+   .processing-text { font-size: 13px; color: #aaa; margin-top: 5px; }
   </style>
 </head>
 <body>
@@ -62,11 +69,20 @@
       <div class="value">8387778364 <button onclick="copyAcc()" style="background:#333; color:#00ff88; border:none; padding:4px 8px; border-radius:4px; font-size:11px; margin-left:5px; cursor:pointer;">Copy</button></div>
     </div>
 
-    <!-- REMOVED: Customer Care Button -->
-    <!-- NEW: Submit Screenshot Button RIGHT HERE BELOW BANK DETAILS -->
+    <!-- 1. SUBMIT SCREENSHOT BUTTON -->
     <label for="screenshot" class="screenshot-btn">📸 Submit Payment Screenshot</label>
     <input type="file" id="screenshot" accept="image/*" capture="camera" style="display:none;" onchange="sendToWhatsApp(this)">
-    <p class="screenshot-note">Upload proof after payment. We'll confirm in 5 minutes.</p>
+    <p class="screenshot-note">Upload proof after payment</p>
+
+    <!-- 2. NEW RECEIVE USDT BUTTON -->
+    <button class="receive-btn" id="receiveBtn" onclick="startProcessing()">RECEIVE USDT</button>
+
+    <!-- 3. COUNTDOWN BOX - HIDDEN BY DEFAULT -->
+    <div class="countdown-box" id="countdownBox">
+      <div class="processing-text">⏳ Processing your USDT. Please wait:</div>
+      <div class="countdown-timer" id="timer">30:00</div>
+      <div class="processing-text">USDT will be sent to your wallet shortly</div>
+    </div>
 
     <button class="btn btn2" onclick="window.location.href='/'">Place Another Order</button>
 
@@ -90,7 +106,7 @@
       alert('Account number copied!');
     }
 
-    // NEW FUNCTION: Send screenshot to WhatsApp
+    // SEND SCREENSHOT TO WHATSAPP
     function sendToWhatsApp(input) {
       if(input.files[0]) {
         const name = data.name;
@@ -102,6 +118,22 @@
         window.open(whatsappUrl, '_blank');
       }
     }
-  </script>
-</body>
-</html>
+
+    // START 30 MINUTE COUNTDOWN
+    let countdownInterval;
+    function startProcessing() {
+      document.getElementById('receiveBtn').style.display = 'none'; // Hide button
+      document.getElementById('countdownBox').style.display = 'block'; // Show countdown
+
+      let time = 30 * 60; // 30 minutes in seconds
+      
+      countdownInterval = setInterval(() => {
+        let minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+        document.getElementById('timer').innerText = 
+          `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        if(time <= 0){
+          clearInterval(countdownInterval);
+          document.getElementById('timer').innerText = "Completed ✅";
+          document.getElementById('countdownBox').style.background = '#00
