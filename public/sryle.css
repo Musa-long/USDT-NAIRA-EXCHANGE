@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 450px;
+  margin-top: 40px;
+}
+
+.container h1 {
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
+.container p {
+  color: #aaa;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.card {
+  background: #111;
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid #222;
+}
+
+label {
+  display: block;
+  font-weight: 700;
+  margin: 15px 0 8px 0;
+  font-size: 14px;
+  color: #ddd;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  outline: none;
+}
+
+input:focus {
+  border-color: #00C853;
+}
+
+.result {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.result span {
+  color: #00C853;
+  font-weight: 900;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: #00C853;
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+.submit-btn:hover {
+  background: #00E676;
+  transform: scale(1.02);
+  }
