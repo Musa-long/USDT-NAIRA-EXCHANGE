@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NairaFlow - Bank Details</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+    body { background: #0a0f0d; color: #fff; min-height: 100vh; padding: 20px; display: flex; justify-content: center; align-items: center; }
+    .container { width: 100%; max-width: 450px; }
+    
+    .logo-box { width: 48px; height: 48px; background: #00ff88; border-radius: 14px; margin-bottom: 8px; }
+    .brand-sub { font-size: 13px; color: #888; letter-spacing: 1px; font-weight: 600; }
+    .tagline { font-size: 14px; color: #00ff88; font-weight: 800; letter-spacing: 2px; margin: 12px 0 25px 0; }
+
+    h1 { font-size: 32px; font-weight: 900; margin-bottom: 10px; line-height: 1.2; }
+    .subtitle { color: #aaa; font-size: 14px; margin-bottom: 25px; font-weight: 500; }
+    
+    .card { background: #121a16; border: 1px solid #1e2a24; border-radius: 16px; padding: 20px; }
+    
+    .detail-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #1e2a24; font-weight: 600; }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-row .label { color: #aaa; font-size: 13px; }
+    .detail-row .value { color: #fff; font-size: 14px; text-align: right; word-break: break-all; max-width: 55%; }
+    
+    .detail-row.total { font-size: 18px; color: #00ff88; font-weight: 900; }
+    .detail-row.total .value { font-size: 20px; }
+    
+    .bank-box { background: #1a231f; border: 1px dashed #00ff88; border-radius: 12px; padding: 16px; margin: 20px 0; text-align: left; }
+    .bank-box p { margin: 8px 0; font-weight: 700; font-size: 14px; }
+    .bank-box b { color: #00ff88; }
+
+    .btn { width: 100%; padding: 16px; background: #00ff88; color: #000; border: none; border-radius: 12px; font-size: 16px; font-weight: 900; cursor: pointer; margin-top: 10px; }
+    .btn:active { transform: scale(0.98); }
+    
+    .warning { font-size: 12px; color: #ffaa00; text-align: center; margin-top: 15px; font-weight: 600; }
+    .back { text-align: center; margin-top: 15px; }
+    .back a { color: #aaa; font-size: 13px; text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-box"></div>
+    <div class="brand-sub">USDT EXCHANGE</div>
+    <div class="tagline">COMPLETE YOUR PAYMENT</div>
+
+    <h1>TRANSFER EXACT<br>AMOUNT</h1>
+    <p class="subtitle">Send money to the account below, then click submit</p>
+    
+    <div class="card">
+      <div class="detail-row">
+        <span class="label">Full Name</span>
+        <span class="value" id="name">-</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">USDT to Receive</span>
+        <span class="value" id="usdt">-</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Rate Used</span>
+        <span class="value" id="rate">-</span>
+      </div>
+      <div class="detail-row total">
+        <span class="label">Total to Pay</span>
+        <span class="value" id="naira">-</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Your TRC20 Wallet</span>
+        <span class="value" id="wallet">-</span>
+      </div>
+
+      <div class="bank-box">
+        <p><b>Bank:</b> Opay / Palmpay / Moniepoint</p>
+        <p><b>Account Name:</b> NAIRAFLOW LTD</p>
+        <p><b>Account Number:</b> 8123456789</p>
+      </div>
+
+      <button class="btn" id="submitBtn">I HAVE PAID - SUBMIT ORDER</button>
+      <p class="warning">⚠️ Send EXACT amount. USDT will be sent in 5-10 minutes after confirmation.</p>
+      <div class="back"><a href
