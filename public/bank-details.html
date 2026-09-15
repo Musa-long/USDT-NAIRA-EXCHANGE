@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Payment - NairaFlow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Complete Your Payment</h1>
+    <p>Transfer the exact amount below to this account</p>
+
+    <div class="card">
+      <div class="detail-row">
+        <span>Full Name</span>
+        <span id="name">Loading...</span>
+      </div>
+      <div class="detail-row">
+        <span>USDT Amount</span>
+        <span id="usdt">Loading...</span>
+      </div>
+      <div class="detail-row">
+        <span>Rate</span>
+        <span>₦1,200 / 1 USDT</span>
+      </div>
+      <div class="detail-row total">
+        <span>Total to Pay</span>
+        <span id="naira">Loading...</span>
+      </div>
+      <div class="detail-row">
+        <span>USDT Wallet</span>
+        <span id="wallet" style="font-size:12px; word-break:break-all;">Loading...</span>
+      </div>
+
+      <div class="bank-box">
+        <p><b>Bank:</b> Opay</p>
+        <p><b>Account Name:</b> NAIRAFLOW LTD</p>
+        <p><b>Account Number:</b> 8123456789</p>
+      </div>
+
+      <a href="https://wa.me/234XXXXXXXXXX" class="submit-btn">I Have Paid - Contact Us</a>
+    </div>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Get data from URL
+  const params = new URLSearchParams(window.location.search);
+  
+  document.getElementById('name').innerText = params.get('name') || 'N/A';
+  document.getElementById('usdt').innerText = (params.get('usdt') || '0') + ' USDT';
+  document.getElementById('naira').innerText = '₦' + parseFloat(params.get('naira') || 0).toLocaleString();
+  document.getElementById('wallet').innerText = params.get('wallet') || 'N/A';
+});
+</script>
+
+<style>
+.detail-row { display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid #222; }
+.detail-row.total { font-size:18px; font-weight:900; color:#00C853; }
+.bank-box { background:#1a1a1a; padding:15px; border-radius:10px; margin:20px 0; text-align:left; }
+</style>
+</body>
+  </html>
