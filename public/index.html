@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NairaFlow - Buy USDT with Naira</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    
+    <!-- TOP LOGO SECTION -->
+    <div class="logo-wrapper">
+      <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT" class="usdt-top-logo">
+    </div>
+    <p class="brand-text">NAIRAFLOW</p>
+    <p class="sub-text">USDT EXCHANGE</p>
+
+    <h2 class="slogan">YOUR MONEY, IN MOTION</h2>
+    <h1 class="main-title">BUY USDT WITH NAIRA</h1>
+    <p class="description">Enter your Naira amount, provide your USDT wallet address and place your order.</p>
+
+    <!-- FORM CARD -->
+    <div class="card">
+      <div class="rate-section">
+        <span>Current rate</span>
+        <span class="live-badge">● LIVE</span>
+      </div>
+      <h2 class="rate">₦1,200 / USDT</h2>
+
+      <label>Full Name</label>
+      <div class="input-box">
+        <span>👤</span>
+        <input type="text" placeholder="Enter your full name">
+      </div>
+
+      <label>Naira amount</label>
+      <div class="input-box">
+        <span>₦</span>
+        <input type="number" placeholder="50000" id="nairaInput">
+      </div>
+
+      <div class="result">
+        <span>USDT you will receive</span>
+        <span class="usdt-result" id="usdtResult">0.0000 USDT</span>
+      </div>
+
+      <label>USDT wallet address</label>
+      <div class="input-box">
+        <span>🔗</span>
+        <input type="text" placeholder="Paste your TRC20 wallet">
+      </div>
+
+      <div class="note">
+        <span>ℹ️</span>
+        <p>Network: TRC20 – Make sure your wallet supports TRC20 network only.</p>
+      </div>
+
+      <a href="/bank-details.html" class="submit-btn">Place Order</a>
+    </div>
+  </div>
+
+<script>
+  // Simple calculator
+  const rate = 1200;
+  document.getElementById('nairaInput').addEventListener('input', function(){
+    let naira = this.value;
+    let usdt = naira / rate;
+    document.getElementById('usdtResult').innerText = usdt.toFixed(4) + ' USDT';
+  });
+</script>
+</body>
+        </html>
